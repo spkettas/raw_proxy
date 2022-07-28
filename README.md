@@ -1,8 +1,16 @@
-## nat_proxy
+## raw_proxy
+
+<div align="center">
+  <h1><code>raw_proxy</code></h1>
+
+  <p>
+    <strong>应用无侵的四层透明代理，透传客户端真实请求</strong>
+  </p>
+</div>
 
 ### 说明 
 
-nat_proxy 利用数据包劫持、篡改技术实现数据包代理转发，对业务无侵入。  
+raw_proxy 利用数据包劫持、篡改技术实现数据包代理转发，对业务无侵入。  
 相对传统nginx配置七层反向代理，可通过设置`X-Forwarded-For`头部传递客户端ip。  
 但nginx四层反向代理，无法传递真实的客户端ip，需要设计用私有协议，携带客户端ip信息，对业务侧有侵入。 
 
@@ -43,5 +51,5 @@ drop代理端口，防止内核回包：
 3. 客户端测试  
 
 访问代理服务器A对外8080端口：`curl http://${A}:8080`  
-B机器web服务打印：from sip=[$A_IP:$A_Port]  
+B机器web服务打印：from sip=[$客户端IP:$客户端Port]  
 
