@@ -2,9 +2,16 @@
 
 <div align="center">
   <h1><code>raw_proxy</code></h1>
-
   <p>
-    <strong>应用无侵的四层透明代理，透传客户端真实请求</strong>
+    <a href="https://img.shields.io/badge/version-1.0.0-blue" alt="version">
+      <img src="https://img.shields.io/badge/version-1.0.0-blue"/>
+    </a>
+    <a href="https://img.shields.io/badge/license-Apache-brightgreen" alt="Apache">
+      <img src="https://img.shields.io/badge/license-Apache-brightgreen">
+    </a>
+  </p>
+  <p>
+    <strong>四层透明代理，透传客户端真实请求</strong>
   </p>
 </div>
 
