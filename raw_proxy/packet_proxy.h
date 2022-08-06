@@ -18,8 +18,7 @@
 
 class CPktProxy {
 public:
-  CPktProxy(const std::string &eth, int port, const std::string &peer_ip,
-            int peer_port, const std::string &honey_ip, int honey_port);
+  CPktProxy(const std::string &dir);
   ~CPktProxy();
 
   bool Init();
@@ -40,6 +39,7 @@ private:
   std::string eth_;
   int dstport_;
 
+  std::string dir_; // 工作目录
   int udp_forward_sock_ = 0;
   sockaddr_in addr_srv_;
   std::string peer_ip_;

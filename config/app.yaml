@@ -1,0 +1,7 @@
+# yml
+Eth: eth1
+Port: 8080
+NatServer: 192.168.1.1
+NatPort: 62000
+RealServer: 172.29.11.1
+RealPort: 12345

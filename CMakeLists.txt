@@ -18,5 +18,5 @@ set(COMM_DIR ${MYCODE_ROOT}/comm)
 include_directories(
 	${COMM_DIR})
 
-add_subdirectory(packet_proxy)
+add_subdirectory(raw_proxy)
 add_subdirectory(nat_server)

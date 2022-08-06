@@ -26,6 +26,7 @@
 
 #include <pcap.h>
 #include <thread>
+#include <yaml-cpp/yaml.h>
 
 using namespace std;
 
@@ -35,12 +36,7 @@ void GetPacket(u_char *arg, const struct pcap_pkthdr *pkthdr,
   pThis->HandleFrame((char *)packet, pkthdr->len);
 }
 
-CPktProxy::CPktProxy(const std::string &eth, int dstport,
-                     const std::string &peer_ip, int peer_port,
-                     const std::string &honey_ip, int honey_port)
-    : eth_(std::move(eth)), dstport_(dstport), peer_ip_(peer_ip),
-      peer_port_(peer_port), honey_ip_(std::move(honey_ip)),
-      honey_port_(honey_port) {}
+CPktProxy::CPktProxy(const string &dir) : dir_(std::move(dir)) {}
 
 CPktProxy::~CPktProxy() {
   if (packet_info_) {
@@ -50,6 +46,17 @@ CPktProxy::~CPktProxy() {
 }
 
 bool CPktProxy::Init() {
+  string path = dir_ + "/conf/app.yaml";
+  printf("config path: %s\n", path.c_str());
+  auto config = YAML::LoadFile(path);
+
+  eth_ = config["Eth"].as<string>();
+  dstport_ = config["Port"].as<int>();
+  peer_ip_ = config["NatServer"].as<string>();
+  peer_port_ = config["NatPort"].as<int>();
+  honey_ip_ = config["RealServer"].as<string>();
+  honey_port_ = config["RealPort"].as<int>();
+
   udp_forward_sock_ = socket(AF_INET, SOCK_DGRAM, 0);
   if (udp_forward_sock_ < 0) {
     printf("Create send udp socket failed, %s", strerror(errno));
